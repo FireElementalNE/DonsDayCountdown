@@ -1,0 +1,35 @@
+<!Doctype html>
+<html>
+  <head>
+    <link href='http://fonts.googleapis.com/css?family=Ubuntu:300' rel='stylesheet' type='text/css'>
+    <link rel="shortcut icon" href="assets/Favicon.ico">
+    <title>Don's Day 2015</title>
+    <script src='/assets/jquery.js'></script>
+    <script src='/assets/script.js'></script>
+    <script type='text/javascript'>
+      function updateWCTime() {
+           var myDiv = $('#countdown');
+           var now = new Date();
+           var kickoff = Date.parse("{{ ddaytime }}");
+           var diff = kickoff - now;
+           var days  = Math.floor( diff / (1000*60*60*24) );
+           var hours = Math.floor( diff / (1000*60*60) );
+           var mins  = Math.floor( diff / (1000*60) );
+           var secs  = Math.floor( diff / 1000 );
+           var dd = days;
+           var hh = hours - days  * 24;
+           var mm = mins  - hours * 60;
+           var ss = secs  - mins  * 60;
+           var myString =   dd + ' days ' + hh + ' hours ' + mm + ' minutes ' + ss + ' seconds';
+           myDiv.html(myString);
+      }
+    </script>
+  </head>
+  <body>
+    <div id="theme">
+      Bend your Koezars...
+    </div>
+    <div id="countdown">
+    </div>
+  </body>
+</html>
