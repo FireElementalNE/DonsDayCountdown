@@ -33,6 +33,7 @@ def index():
     content = json.loads(urllib.urlopen(url).read())
     if content:
         r = make_response(render_template('index.html',
+            ip=request.remote_addr,
             plat_type=content['platform_type'],
             plat_name=content['platform_name'],
             plat_version=content['platform_version'],
