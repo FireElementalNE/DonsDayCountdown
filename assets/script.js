@@ -1,19 +1,21 @@
-function applyFont(el) {
-    el.css('font-family', 'Ubuntu, sans-serif');
+function updateWCTime() {
+   var myDiv = $('#countdown');
+   var now = new Date();
+   var kickoff = Date.parse("July 17, 2015 17:00:00");
+   var diff = kickoff - now;
+   var days  = Math.floor( diff / (1000*60*60*24) );
+   var hours = Math.floor( diff / (1000*60*60) );
+   var mins  = Math.floor( diff / (1000*60) );
+   var secs  = Math.floor( diff / 1000 );
+   var dd = days;
+   var hh = hours - days  * 24;
+   var mm = mins  - hours * 60;
+   var ss = secs  - mins  * 60;
+   var myString =   dd + ' days ' + hh + ' hours ' + mm + ' minutes ' + ss + ' seconds';
+   myDiv.html(myString);
 }
-
 $(document).ready(function () {
-    myDiv = $('#countdown');
-    myDiv.css('text-align','center');
-    myDiv.css('font-size','2em');
-    myDiv.css('margin-top','10%');
-    applyFont(myDiv);
-    myDiv.css('color','#8e44ad');
-    themeDiv = $('#theme');
-    applyFont(themeDiv);
-    themeDiv.css('color', '#dde4e6');
-    themeDiv.css('font-size', '8em');
+    $('body').css('font-family','Ubuntu, sans-serif');
     updateWCTime();
-    $('body').css('background','#ecf0f1');
     setInterval('updateWCTime()', 1000 );
 });

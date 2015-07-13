@@ -1,0 +1,17 @@
+body {
+	background: #ecf0f1;
+}
+#countdown {
+	text-align: center;
+	font-size: 2em;
+	margin-top: 10%;
+	color: #8e44ad;
+}
+#theme {
+	color: #dde4e6;
+	font-size: 8em;
+}
+#info {
+	color: #dde4e6;
+	font-size: 1em;	
+}
