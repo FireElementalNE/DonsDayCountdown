@@ -12,7 +12,7 @@ function getWCTime() {
    return myString
 }
 
-function regular() {
+function reg() {
   $('#dday').hide();
 }
 
@@ -54,7 +54,7 @@ $(document).ready(function () {
       setInterval('flash_dday()', 500 );
     }
     else {
-      regular();
+      reg();
       setInterval('updateWCTime()', 1000 );
     }    
 
