@@ -15,3 +15,9 @@ body {
 	color: #999999;
 	font-size: 1em;	
 }
+#dday {
+	text-align: center;
+	font-size: 2em;
+	margin-top: 10%;
+	color: #c0392b;
+}
