@@ -25,7 +25,7 @@ function ddaystuff() {
 
 function getTimeInt() {
   var now = new Date();
-  var kickoff = Date.parse("July 17, 2015 17:00:00");
+  var kickoff = Date.parse("July 17, 2016 17:00:00");
   return kickoff - now;
 }
 
