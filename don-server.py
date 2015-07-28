@@ -1,4 +1,6 @@
 #!/usr/bin/python
+from Crypto.Cipher import AES
+from binascii import b2a_hex, a2b_hex
 from flask import \
     Flask, \
     render_template, \
@@ -10,6 +12,22 @@ import argparse
 import urllib
 import json
 app = Flask(__name__, static_folder='assets', template_folder='tmpl')
+
+# secretkeysecret1
+ciphertext = 'ce0ddb23432401b5d2829a4367527f46'
+
+def getWord(key):
+    global ciphertext
+    try:
+        iv = a2b_hex('218cd1ce7eb441363424e126d9864d40')
+        obj = AES.new(key, AES.MODE_CBC, iv)
+        decr = obj.decrypt(a2b_hex(ciphertext))
+        ans = 'The Secret!!!!!!'
+        if decr != ans:
+            decr = b2a_hex(decr)
+        return decr
+    except ValueError:
+        return None
 
 def buildCSP():
     google = 'http://fonts.googleapis.com'
@@ -25,6 +43,25 @@ def buildCSP():
     frame = 'frame-src %s;' % (none_tag)
     img = 'img-src %s data:;' % (self_tag)
     return default + script + font + style + frame  + img
+
+@app.route('/hash')
+def hash():
+    global ciphertext
+    keyIn = request.args.get('key')
+    if keyIn:
+        ret = getWord(keyIn)
+        if ret:
+            return make_response(render_template('hash.html', key=keyIn, the_ans=ret, hash=ciphertext))
+        else:
+            r = make_response(render_template('hash_error.html', the_error="The key is wrong. (must be 16 characters)"))
+        csp = buildCSP()
+        r.headers.set('Content-Security-Policy', csp)
+        return r
+    else:
+        r = make_response(render_template('hash_error.html', the_error="Must provide key."))
+        csp = buildCSP()
+        r.headers.set('Content-Security-Policy', csp)
+        return r
 
 @app.route('/', methods=['GET'])
 def index():
