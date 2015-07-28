@@ -51,7 +51,7 @@ def hash():
     if keyIn:
         ret = getWord(keyIn)
         if ret:
-            return make_response(render_template('hash.html', key=keyIn, the_ans=ret, hash=ciphertext))
+            r = make_response(render_template('hash.html', key=keyIn, the_ans=ret, hash=ciphertext))
         else:
             r = make_response(render_template('hash_error.html', the_error="The key is wrong. (must be 16 characters)"))
         csp = buildCSP()
