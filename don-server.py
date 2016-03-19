@@ -1,5 +1,5 @@
 #!/usr/bin/python
-from Crypto.Cipher import AES
+from Crypto.Hash import SHA, SHA256, SHA384, SHA512
 from binascii import b2a_hex, a2b_hex
 from flask import \
     Flask, \
@@ -13,21 +13,7 @@ import urllib
 import json
 app = Flask(__name__, static_folder='assets', template_folder='tmpl')
 
-# secretkeysecret1
-ciphertext = 'ce0ddb23432401b5d2829a4367527f46'
 
-def getWord(key):
-    global ciphertext
-    try:
-        iv = a2b_hex('218cd1ce7eb441363424e126d9864d40')
-        obj = AES.new(key, AES.MODE_CBC, iv)
-        decr = obj.decrypt(a2b_hex(ciphertext))
-        ans = 'The Secret!!!!!!'
-        if decr != ans:
-            decr = b2a_hex(decr)
-        return decr
-    except ValueError:
-        return None
 
 def buildCSP():
     google = 'http://fonts.googleapis.com'
@@ -47,18 +33,23 @@ def buildCSP():
 @app.route('/hash')
 def hash():
     global ciphertext
-    keyIn = request.args.get('key')
-    if keyIn:
-        ret = getWord(keyIn)
-        if ret:
-            r = make_response(render_template('hash.html', key=keyIn, the_ans=ret, hash=ciphertext))
-        else:
-            r = make_response(render_template('hash_error.html', the_error="The key is wrong. (must be 16 characters)"))
+    in_str = request.args.get('in_str')
+    if in_str:
+	shas = []
+	ans = []
+	shas.append(SHA.new())
+	shas.append(SHA256.new())
+	shas.append(SHA384.new())
+	shas.append(SHA512.new())
+	for el in shas:
+		el.update(in_str)
+		ans.append(el.hexdigest())
+	r = make_response(render_template('hash.html', sha1=ans[0], sha256=ans[1], sha384=ans[2], sha512=ans[3])) 
         csp = buildCSP()
         r.headers.set('Content-Security-Policy', csp)
         return r
     else:
-        r = make_response(render_template('hash_error.html', the_error="Must provide key."))
+        r = make_response(render_template('hash_error.html', the_error="Must provide String."))
         csp = buildCSP()
         r.headers.set('Content-Security-Policy', csp)
         return r
