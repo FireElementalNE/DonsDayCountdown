@@ -18,6 +18,7 @@ function reg() {
 
 function ddaystuff() {
    $('#theme').css('color',"#E44B23");
+   $('#bottom').css('color',"#E44B23");
    $('#countdown').hide();
    $('#info').hide();
    $('#dday').show();
@@ -25,7 +26,7 @@ function ddaystuff() {
 
 function getTimeInt() {
   var now = new Date();
-  var kickoff = Date.parse("July 17, 2016 17:00:00");
+  var kickoff = Date.parse("August 12, 2016 16:00:00");
   return kickoff - now;
 }
 
@@ -37,17 +38,20 @@ function flash_dday() {
   if($('body').css('background-color') == "rgb(236, 240, 241)") {
     $('#dday').css('color',"#dde4e6");
     $('#theme').css('color',"#dde4e6");
+    $('#bottom').css('color',"#dde4e6");
     $('body').css('background-color', '#E44B23');
   }
   else {
     $('#dday').css('color',"#E44B23");
     $('#theme').css('color',"#E44B23");
+    $('#bottom').css('color',"#E44B23");
     $('body').css('background-color', '#ECF0F1'); 
   } 
 }
 
 $(document).ready(function () {
     $('body').css('font-family','Ubuntu, sans-serif');
+	$('#pastdday').hide();
     var negTest = getTimeInt();
     if(negTest < 0) {
       ddaystuff();
@@ -56,6 +60,6 @@ $(document).ready(function () {
     else {
       reg();
       setInterval('updateWCTime()', 1000 );
-    }    
-
+    }
+	console.log(getWCTime());    
 });

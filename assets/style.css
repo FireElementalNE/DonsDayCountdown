@@ -8,9 +8,22 @@ body {
 	margin-top: 10%;
 	color: #c0392b;
 }
+#pastdday {
+	text-align: center;
+	font-size: 2em;
+	margin-top: 10%;
+	color: #c0392b;
+}
+
 #theme {
 	color: #dde4e6;
 	font-size: 8em;
+}
+#bottom {
+	color: #dde4e6;
+	font-size: 7em;
+	position: fixed;
+	bottom: 0%;
 }
 #info {
 	color: #999999;
