@@ -5,7 +5,7 @@ body {
 #countdown {
 	text-align: center;
 	font-size: 2em;
-	margin-top: 10%;
+	margin-top: 5%;
 	color: #c0392b;
 }
 #pastdday {
@@ -13,6 +13,13 @@ body {
 	font-size: 2em;
 	margin-top: 10%;
 	color: #c0392b;
+}
+
+#don_pic {
+  	display:block;
+  	margin-left:auto;
+  	margin-right:auto;
+  	opacity: 0.2;
 }
 
 #theme {

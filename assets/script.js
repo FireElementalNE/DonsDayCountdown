@@ -20,6 +20,7 @@ function ddaystuff() {
    $('#theme').css('color',"#E44B23");
    $('#bottom').css('color',"#E44B23");
    $('#countdown').hide();
+   $("#don_pic").css('opacity', '1.0')
    $('#info').hide();
    $('#dday').show();
 }
